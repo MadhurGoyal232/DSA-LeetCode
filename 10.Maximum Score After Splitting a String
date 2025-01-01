@@ -1,0 +1,38 @@
+// debugging the code is the key to answer here, streak day 1, completed myself in short time too.
+class Solution {
+    public int maxScore(String s) {
+        char[] split = s.toCharArray();
+        int lCount = 0;
+        int rCount = 0; 
+        int total = 0;
+        int max = 0;
+
+        for(int i=0;i<split.length-1;i++){
+
+            for(int x = 0; x<=i;x++){
+                if (split[x] == '0'){
+                    lCount++;
+                }
+            }
+
+            for(int k = i+1; k<=split.length-1;k++){
+                if (split[k] == '1'){
+                    rCount++;
+                }
+            }
+
+            total = lCount+rCount;
+            if(total>max){
+                max = total;
+            }
+            lCount = 0;
+            rCount = 0;
+
+
+
+        }
+
+        return max;
+        
+    }
+}
