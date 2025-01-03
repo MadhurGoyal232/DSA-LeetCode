@@ -1,0 +1,55 @@
+class Solution {
+    public int waysToSplitArray(int[] nums) {
+
+        long count = 0;
+        for(int j=0;j<nums.length;j++){
+            count+= nums[j];
+        }
+
+        long left = 0;
+        long right = count;
+        
+        int total = 0;
+        for(int i=0;i<nums.length-1;i++){
+            
+            left+= nums[i];
+            right-= nums[i];
+
+            if(left>=right){
+                total++;
+            }
+            
+
+            }
+
+        return total;
+    }
+}
+
+
+// class Solution {
+//     public int waysToSplitArray(int[] nums) {
+        
+//         int total = 0;
+//         for(int i=0;i<nums.length-1;i++){
+            
+//             int count = 0;
+//             int countX = 0;
+
+//             for(int j=0;j<=i;j++){
+//                 count = count + nums[j];
+//             }
+//             for(int k=i+1;k<nums.length;k++){
+//                 countX = countX + nums[k];
+//             }
+
+//             if (count>=countX){
+//                 total++;
+//             }
+
+
+//         }
+
+//         return total;
+//     }
+// }
