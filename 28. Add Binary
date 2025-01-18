@@ -1,0 +1,28 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        StringBuilder result = new StringBuilder();
+
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        int carry = 0;
+
+        // Traverse both strings from the end
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int digitA = i >= 0 ? a.charAt(i) - '0' : 0; // Get digit from a or 0 if exhausted
+            int digitB = j >= 0 ? b.charAt(j) - '0' : 0; // Get digit from b or 0 if exhausted
+
+            // Binary addition
+            int sum = digitA + digitB + carry;
+            carry = sum / 2; // Update carry
+            result.append(sum % 2); // Append the current bit
+
+            // Move pointers
+            i--;
+            j--;
+        }
+
+        // Reverse the result to get the correct binary string
+        return result.reverse().toString();
+    }
+
+}
