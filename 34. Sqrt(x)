@@ -1,0 +1,38 @@
+class Solution {
+    public int mySqrt(int x) {
+        if(x==0){
+            return 0;
+        }
+        else{
+
+            int min =0;
+            int max = x;
+            int mid = 0;
+            int result = 0;
+
+            while (min<=max){
+
+            mid = min+ (max- min)/2;
+            long square = (long) mid * mid;
+
+
+            if(square == x ){
+
+                return mid;
+            }else if(square < x){
+                result = mid;
+                min = mid+1;
+            }else{
+                max = mid-1;
+            }
+
+
+            }
+
+            return result;
+        }
+
+
+        
+    }
+}
