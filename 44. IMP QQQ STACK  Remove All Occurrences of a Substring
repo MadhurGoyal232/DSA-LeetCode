@@ -1,0 +1,36 @@
+import java.util.Stack;
+
+class Solution {
+    
+    public boolean check(Stack<Character> stack, String part, int m) {
+        Stack<Character> temp = new Stack<>();
+        for (char ch : stack) temp.push(ch);
+
+        for (int i = m - 1; i >= 0; i--) {
+            if (temp.isEmpty() || temp.pop() != part.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String removeOccurrences(String s, String part) {
+        Stack<Character> stack = new Stack<>();
+        int len = part.length();
+
+        for (char ch : s.toCharArray()) {
+            stack.push(ch);
+
+            if (stack.size() >= len && check(stack, part, len)) {
+                for (int j = 0; j < len; j++) {
+                    stack.pop();
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+        return sb.reverse().toString(); 
+    }
+}
