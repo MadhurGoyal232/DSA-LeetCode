@@ -21,3 +21,33 @@ while(n%i == 0){
 if(n!=1){
   System.out.println(n);      //////////eg 46,  2 and 23 are factors.
 }
+
+
+
+RECURSION-------------------------------------------------------
+
+import java.util.Scanner;
+class Main{
+    public static void findPrimeFactors(int n, int factor) {
+        if (n == 1) return; // Base case: Stop when n becomes 1
+        
+        if (n % factor == 0) { // If n is divisible by factor
+            System.out.println(factor); // Print the factor
+            findPrimeFactors(n / factor, factor); // Recur with reduced n
+        } else {
+            findPrimeFactors(n, factor + 1); // Try next factor
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.close();
+
+        findPrimeFactors(n, 2); // Start with smallest prime factor (2)
+    }
+
+}
+
+
+
