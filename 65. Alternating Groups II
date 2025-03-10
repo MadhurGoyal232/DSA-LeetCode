@@ -1,0 +1,55 @@
+// class Solution {
+  
+//     public int numberOfAlternatingGroups(int[] colors, int k) {
+//         int n = colors.length;
+//         int arr[] = new int[n+k-1];
+//         int count = 0;
+//         boolean flag = true;
+
+//         for(int i=0;i<n;i++){
+//             arr[i] = colors[i];
+//         }
+
+//         for(int j=0;j<k-1;j++){
+//             arr[n+j] = colors[j];
+//         }
+
+//         for(int i=0;i<n;i++){
+
+//             while (i<=k-i-1){
+//                 if(arr[i] != arr[k-i-1]){
+//                     flag = false;
+//                     break;
+//                 }
+//                 i++;
+//             }
+//             if(flag == true){
+//                 count++;
+//             }
+//         }
+
+//         return count;
+
+//     }
+// }
+
+class Solution {
+    public int numberOfAlternatingGroups(int[] colors, int k) {
+        int n = colors.length;
+        int res = 0;
+        int left = 0;
+        for(int right = 1;right<(n+k-1); right++){
+            if(colors[right%n] == colors[(right-1)%n]){
+                left = right;
+            }
+            if(right-left +1 ==k){
+                res++;
+                left++;
+            }
+        }
+
+        
+
+        return res;
+    }
+}
