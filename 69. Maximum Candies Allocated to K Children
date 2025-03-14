@@ -1,0 +1,59 @@
+class Solution {
+    public boolean canAllocateCandies(int[] candies , int mid, long k){
+        long count = 0;
+
+        
+
+            for(int i=0;i<candies.length;i++ ){
+
+                if(candies[i] >= mid){
+                    if(mid == 0){
+                        mid = 1;
+                    }
+                    
+                    count+= candies[i] / mid;
+                }
+            }
+            
+        
+        if(count>=k){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    public int maximumCandies(int[] candies, long k) {
+        int high = 0;
+        long sum = 0;
+        int low = 0;
+        int best = 0;
+
+        for(int i=0;i<candies.length;i++){
+
+            if(high<candies[i]){
+                high = candies[i];
+            }
+            sum+= candies[i];
+        }
+
+        if(sum<k){
+            return 0;
+        }
+
+        while(low<=high){
+
+            int mid = low + (high-low)/2;
+            if(canAllocateCandies(candies, mid , k)){
+                low = mid+1;
+                best = mid;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+
+        return best;
+        
+    }
+}
