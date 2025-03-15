@@ -1,0 +1,51 @@
+class Solution {
+
+    public boolean canStealHouse(int nums[],int mid,int k){
+        int x = 0;
+
+        for(int i=0;i<nums.length;i++){
+
+            if(nums[i] <= mid){
+            i++;
+            x++;
+            }
+
+        }
+        return x>=k;
+    }
+    public int minCapability(int[] nums, int k) {
+
+        int n = nums.length;
+        int min = nums[0];
+        int max = nums[0];
+        int mid = 0;
+        
+        for(int i=0;i<n;i++){
+
+            if(nums[i] > max){
+                max = nums[i];
+            }
+
+            if(nums[i] < min){
+                min = nums[i];
+            }
+        }
+
+        int ans = 0;
+
+        while(min<= max){
+
+            mid = min + (max-min)/2;
+
+            if(canStealHouse(nums,mid,k)){
+                max = mid-1;
+                ans = mid;
+            }else{
+                min = mid+1;
+            }
+        }
+
+        return ans;
+        
+    }
+}
