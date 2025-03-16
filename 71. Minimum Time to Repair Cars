@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isPossible(int ranks[], long mid,int cars){
+
+        // t = r * n2 , so n = sqrt t/r.
+
+        long cr = 0;
+
+        for(int i=0;i<ranks.length;i++){
+
+
+            cr+=  (long) (Math.sqrt((1.0*mid)/ranks[i]));
+
+        }
+
+        return cr>=cars;
+        
+
+    }
+    public long repairCars(int[] ranks, int cars) {
+
+        long min = ranks[0];
+        long max = 0;
+        long ans =0;
+
+        for(int i=0;i<ranks.length;i++){
+            if(ranks[i] < min){
+                min = ranks[i];
+            }
+        }
+
+        max = min*cars*cars;
+
+        while(min<=max){
+
+            long mid = min + (max-min)/2;
+
+            if(isPossible(ranks,mid,cars)){
+                max = mid-1;
+                ans = mid;
+            }else{
+                min = mid+1;
+            }
+        }
+
+        return ans;
+        
+    }
+}
