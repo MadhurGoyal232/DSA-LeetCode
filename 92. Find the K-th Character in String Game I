@@ -1,0 +1,22 @@
+class Solution {
+    public char kthCharacter(int k) {
+
+        StringBuilder sb = new StringBuilder("a");
+        while(sb.length() <= k){
+            int len = sb.length();
+            for(int i=0;i<len;i++){
+                char x = sb.charAt(i);
+                if(x == 'z'){
+                    sb.append("a");
+                }else{
+                sb.append((char)(x+1));                
+                }
+            }
+        }
+        String q = sb.toString();
+        int r = k-1;
+        char y = q.charAt(r);
+        return y;
+        
+    }
+}
