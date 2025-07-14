@@ -1,0 +1,49 @@
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+
+        ArrayList<Integer> listp = new ArrayList<>();
+        ArrayList<Integer> listn = new ArrayList<>();
+        // ArrayList<Integer> finala = new ArrayList<>();
+
+        int counta = 0;
+        int countb = 0;
+        for(int i=0;i<nums.length;i++){
+
+            if(nums[i] > 0){
+                listp.add(nums[i]);
+                counta++;
+            }
+
+            if(nums[i] < 0){
+                listn.add(nums[i]);
+                countb++;
+            }
+        }
+        int x = 0;
+        int y = 0;
+        int result[] = new int[nums.length];
+        int idx = 0;
+        while(x< listp.size() && y < listn.size()){
+
+            // finala.add(listp.get(x++));
+            // finala.add(listn.get(y++));
+
+            result[idx++] = listp.get(x++);
+            result[idx++] = listn.get(y++);
+
+
+        }
+        
+        while (x < listp.size()) {
+             result[idx++] = listp.get(x++);
+        }
+
+        // Add remaining negatives (if any)
+        while (y < listn.size()) {
+             result[idx++] = listn.get(y++);
+        }
+
+        return result;
+
+    }
+}
