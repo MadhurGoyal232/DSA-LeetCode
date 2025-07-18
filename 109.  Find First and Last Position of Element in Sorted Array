@@ -1,0 +1,79 @@
+class Solution {
+
+     public int firstpos(int [] nums , int target){
+        int low = 0;
+        int high = nums.length-1;
+        int index = -1;
+        int mid = 0;
+        while(low<=high){
+            
+            mid = low+ (high-low)/2;
+
+            if(nums[mid] == target){
+                
+                index = mid;
+                high = mid-1;
+            }
+            else if(nums[mid] < target){
+                    
+                    low = mid+1;
+                }
+            else{
+                    high = mid-1;
+                }
+                    
+                       
+        }
+            return index;
+    }
+
+      public int lastpos(int [] nums , int target){
+        int low = 0;
+        int high = nums.length-1;
+        int index = -1;
+        int mid = 0;
+        while(low<=high){
+            
+            mid = low+ (high-low)/2;
+
+            if(nums[mid] == target){
+                
+                index = mid;
+                low = mid+1;
+            }
+            else if(nums[mid] < target){
+                    
+                    low = mid+1;
+                }
+            else{
+                    high = mid-1;
+                }                 
+            
+        }
+            return index;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        
+        
+        int arr[] = {-1 , -1};
+        arr[0] = firstpos(nums , target);
+        arr[1] = lastpos(nums , target);
+        
+        return arr;
+
+        // if(arr[0] != -1) {
+        //     int x = mid+1;
+        //     int y = mid-1;
+        //     if(arr[x] == target){
+        //         arr[1] = x;
+        //     }
+        //     if(arr[y] == target){
+        //         arr[1] = mid;
+        //         arr[0] = y;  
+        //     }
+        // }
+
+
+        
+    }
+}
