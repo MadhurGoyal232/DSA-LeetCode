@@ -1,0 +1,39 @@
+class Solution {
+    public int search(int[] nums, int target) {
+
+        int index = 0;
+        int n = nums.length;
+        for(int i=0;i<n-1;i++){
+            if(nums[i+1] < nums[i]){
+                index = i+1;
+                break;
+            }
+        }
+        int low = index;
+
+        int high = index + n-1;
+        int mid = 0;
+        int ans = -1;
+        while(low<=high){
+            
+            mid = low+ (high-low)/2;
+
+            if(nums[mid%n]  == target){
+            
+                ans = mid%n;
+                return ans;
+            }
+            else if(nums[mid%n] < target){
+                    
+                    low = mid+1;
+                }
+            else{
+                    high = mid-1;
+                }
+                    
+                       
+        }
+
+        return ans;
+    }
+}
