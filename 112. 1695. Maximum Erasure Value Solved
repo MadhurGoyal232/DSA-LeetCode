@@ -1,0 +1,56 @@
+// class Solution {
+//     public int maximumUniqueSubarray(int[] nums) {
+
+//         HashMap<Integer,Integer> map = new HashMap<>();
+//         int totalSum = 0;
+//         int index = 0;
+        
+        
+//         while(index<= nums.length-1){
+//             int currentSum = 0;
+//             for(int i=index;i<nums.length;i++){
+
+//                 if(map.containsKey(nums[i])){
+//                     break;
+//                 }else{
+//                     map.put(nums[i] , 1);
+//                     currentSum+= nums[i];
+//                 }
+//             }
+
+//             totalSum = Math.max(totalSum,currentSum);
+//             index++;
+//             map.clear();
+//         }
+
+//         return totalSum;
+//     }
+// }
+
+import java.util.*;
+
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int start = 0, end = 0;
+        int currentSum = 0, maxSum = 0;
+
+        while (end < nums.length) {
+            // Step 1: If nums[end] is a duplicate (exists in set)
+            while (set.contains(nums[end])) {
+                // Step 2: Remove from start until it's no longer a duplicate
+                set.remove(nums[start]);
+                currentSum -= nums[start];
+                start++;
+            }
+
+            // Step 3: Add nums[end] to the current window
+            set.add(nums[end]);
+            currentSum += nums[end];
+            maxSum = Math.max(maxSum, currentSum);
+            end++;
+        }
+
+        return maxSum;
+    }
+}
