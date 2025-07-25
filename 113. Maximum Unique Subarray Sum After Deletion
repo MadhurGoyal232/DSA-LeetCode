@@ -1,0 +1,46 @@
+class Solution {
+    public int maxSum(int[] nums) {
+
+        int r = 0;
+
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] > 0){
+                r = 1;
+            }
+        }
+        int sum =0;
+        HashSet<Integer> set = new HashSet<>();
+        
+            for(int i=0;i<nums.length;i++){
+                if(r>0){
+                if(nums[i] < 0){
+                    continue;
+                }else{
+                    set.add(nums[i]);
+                }
+            }
+        
+            else{
+                set.add(nums[i]);
+                }
+        }
+        int min = Integer.MIN_VALUE;
+       
+        if(r>0){
+            for(int x: set){
+                sum+= x;
+            }
+        }else{
+
+            for(int x : set){
+                if(x>min){
+                    min = x;
+                    sum = x;
+                }
+            }
+            
+        }
+
+        return sum;
+    }
+}
