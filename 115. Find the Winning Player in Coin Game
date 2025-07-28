@@ -1,0 +1,17 @@
+class Solution {
+    public String winningPlayer(int x, int y) {
+        boolean r = true;
+        while(x>0 && y>3){
+
+            x = x-1;
+            y = y-4;
+            r= !r;
+
+        }
+        if(r==false){
+            return "Alice";
+        }else{
+            return "Bob";
+        }
+    }
+}
