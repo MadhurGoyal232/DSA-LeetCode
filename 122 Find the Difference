@@ -1,0 +1,43 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+
+        int sum = 0;
+        int tsum = 0;
+        for(char ch: s.toCharArray()){
+            sum+= ch;
+        }
+        for(char ch:t.toCharArray()){
+            tsum+= ch;
+        }
+        return (char)(tsum-sum);
+
+        // HashMap<Character, Integer> map = new HashMap<>();
+        
+        // // Step 1: Count characters in s
+        // for (char ch : s.toCharArray()) {
+        //     map.put(ch, map.getOrDefault(ch, 0) + 1);
+        // }
+        
+        // // Step 2: Subtract counts using t
+        // for (char ch : t.toCharArray()) {
+        //     if (!map.containsKey(ch) || map.get(ch) == 0) {
+        //         return ch; // Found extra character
+        //     }
+        //     map.put(ch, map.get(ch) - 1);
+        // }
+        
+        // return '\u0000'; 
+        // int i = 0;
+        // int len = t.length();
+        // char r = ' ';
+        // while(len -- >0){
+
+        //     char x = t.charAt(i++);
+        //     if(s.indexOf(x) == -1){
+        //         r =  x;
+        //         break;
+        //     }
+        // }
+        // return r;
+    }
+}
