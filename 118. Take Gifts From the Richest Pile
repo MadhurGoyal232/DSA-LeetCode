@@ -1,0 +1,21 @@
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+
+        Arrays.sort(gifts);
+        int n = gifts.length;
+        int r= gifts.length-1;
+        while(k-->0){
+            
+            int x = r;
+            gifts[x] = (int)Math.floor(Math.sqrt(gifts[x]));
+            Arrays.sort(gifts);            
+        }
+           
+        long sum = 0;
+
+        for(int i=0;i<n;i++){
+            sum+= gifts[i];
+        }
+        return sum;
+    }
+}
