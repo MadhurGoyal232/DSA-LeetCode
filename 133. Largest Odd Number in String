@@ -1,0 +1,27 @@
+class Solution {
+    public String largestOddNumber(String num) {
+        // StringBuilder sb = new StringBuilder(num);
+        // int x = num.length() - 1;
+        // while(sb.charAt(x)== '0' || sb.charAt(x)== '2' || sb.charAt(x)== '4' || sb.charAt(x)== '6' || sb.charAt(x)== '8' ){
+            
+        //     sb.deleteCharAt(x);
+        //     if(sb.length() == 0){
+        //         return "";
+        //     }
+        //     x--;
+        // }
+        // return sb.toString();
+
+        int x = num.length() - 1;
+
+        while(x>=0){
+            if((num.charAt(x) - '0')%2!= 0 ){
+                return num.substring(0,x+1);
+            }
+            x--;
+        }
+        return "";
+        
+        
+    }
+}
