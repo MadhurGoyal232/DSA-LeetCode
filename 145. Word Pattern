@@ -1,0 +1,35 @@
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+
+        String[] str = s.split("\\s+");
+        if(pattern.length() != str.length){
+            return false;
+        }
+        char[] arr = pattern.toCharArray();
+
+        HashMap<Character, String> map1 = new HashMap<>();
+        HashMap<String , Character> map2 = new HashMap<>();
+
+        for(int i = 0; i<pattern.length();i++){
+            char c = pattern.charAt(i);
+            String q = str[i];
+            if(map1.containsKey(c)){
+                if(!map1.get(c).equals(q)){
+                    return false;
+                }
+            }else{
+                map1.put(c,q);
+            }
+            
+            if(map2.containsKey(q)){
+                if(map2.get(q) != c){
+                    return false;
+                }
+            }else{
+                map2.put(q,c);
+            }
+        }
+
+        return true;
+    }
+}
