@@ -1,0 +1,92 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int count = 0;
+        int countz = 0;
+        int maxCount = 0;
+        int pos = 0;
+        int i=0;
+        while(i<nums.length){
+           
+            if(countz>k){
+                countz = 0;
+                i = pos+1;
+                count = 0;
+            }
+             if(nums[i] == 0){
+                countz++;
+                if(countz == 1){
+                    pos = i;
+                }
+                
+            }
+            if(nums[i] == 1 || countz <=k ){
+                count +=1;
+            }
+            maxCount = Math.max(maxCount , count);
+            i++;
+        }
+        return maxCount;
+    }
+}
+
+
+
+
+// class Solution {
+//     public int longestOnes(int[] nums, int k) {
+//         int count = 0;
+//         int countz = 0;
+//         int maxCount = 0;
+//         int pos = 0;
+//         int i=0;
+//         while(i<nums.length){
+           
+//             if(countz>k){
+//                 countz = 0;
+//                 i = pos+1;
+//                 count = 0;
+//             }
+//              if(nums[i] == 0){
+//                 countz++;
+//                 if(countz == 1){
+//                     pos = i;
+//                 }
+                
+//             }
+//             if(nums[i] == 1 || countz <=k ){
+//                 count +=1;
+//             }
+//             maxCount = Math.max(maxCount , count);
+//             i++;
+//         }
+//         return maxCount;
+//     }
+// }
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int left = 0, right = 0;
+        int zeros = 0;
+        int maxLen = 0;
+
+        while (right < nums.length) {
+            if (nums[right] == 0) {
+                zeros++;
+            }
+
+            // Shrink window if zeros exceed k
+            while (zeros > k) {
+                if (nums[left] == 0) {
+                    zeros--;
+                }
+                left++;
+            }
+
+            // update max length
+            maxLen = Math.max(maxLen, right - left + 1);
+            right++;
+        }
+
+        return maxLen;
+    }
+}
