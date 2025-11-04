@@ -1,0 +1,43 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int row = board.length;
+        int col = board[0].length;
+        boolean[][] isVisited = new boolean[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    if(dfs(board, word, i, j, 0, isVisited))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean dfs(char[][] board, String word, int row, int col, int index, boolean[][] isVisited) {
+        // base case: found the whole word
+        if (index == word.length()) return true;
+
+        // boundary + mismatch + visited check
+        if (row < 0 || row >= board.length || col < 0 || col >= board[0].length ||
+            board[row][col] != word.charAt(index) || isVisited[row][col]) {
+            return false;
+        }
+
+        // mark visited
+        isVisited[row][col] = true;
+
+        // explore 4 directions
+        boolean found =
+            dfs(board, word, row + 1, col, index + 1, isVisited) || // down
+            dfs(board, word, row - 1, col, index + 1, isVisited) || // up
+            dfs(board, word, row, col + 1, index + 1, isVisited) || // right
+            dfs(board, word, row, col - 1, index + 1, isVisited);   // left
+
+        // backtrack (unmark)
+        isVisited[row][col] = false;
+
+        return found;
+    }
+}
