@@ -1,0 +1,33 @@
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        HashMap<String, Integer> map = new HashMap<>();
+        List<String> arrList = new ArrayList<>();
+
+        for(int i=0;i<words.length;i++){
+
+            String x = words[i];
+            if(map.containsKey(x)){
+                map.put(x, map.get(x) + 1);
+            }else{
+                map.put(x , 1);
+            }
+        }
+
+        PriorityQueue<Map.Entry<String, Integer>> pq =
+            new PriorityQueue<>((a, b) -> {
+                if (a.getValue().equals(b.getValue())) {
+                    return a.getKey().compareTo(b.getKey());
+                }
+                return b.getValue() - a.getValue();
+            });
+
+        pq.addAll(map.entrySet());
+
+        for(int i=0;i<k;i++){
+        Map.Entry<String, Integer> entry = pq.poll();
+            String v = entry.getKey();
+            arrList.add(v);
+        }
+        return arrList;
+    }
+}
