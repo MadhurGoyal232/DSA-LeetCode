@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> allSubsets = new ArrayList<>();
+        List<Integer> current = new ArrayList<>();
+        generateSubsets(0, nums, current, allSubsets);
+        return allSubsets;
+    }
+
+    public void generateSubsets(int index, int[] nums, List<Integer> current, List<List<Integer>> allSubsets) {
+        if (index == nums.length) {
+            allSubsets.add(new ArrayList<>(current));
+            return;
+        }
+
+        // Include current number
+        current.add(nums[index]);
+        generateSubsets(index + 1, nums, current, allSubsets);
+
+        // Backtrack and exclude current number
+        current.remove(current.size() - 1);
+        generateSubsets(index + 1, nums, current, allSubsets);
+    }
+}
