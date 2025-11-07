@@ -1,0 +1,28 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> allSubsets = new ArrayList<>();
+        List<Integer> current = new ArrayList<>();
+        Arrays.sort(nums);
+        generateSubsets(0, nums, current, allSubsets);
+        return allSubsets;
+    }
+
+    public void generateSubsets(int index, int[] nums, List<Integer> current, List<List<Integer>> allSubsets) {
+        if (index == nums.length) {
+            allSubsets.add(new ArrayList<>(current));
+            return;
+        }
+
+        // Include current number
+        current.add(nums[index]);
+        generateSubsets(index + 1, nums, current, allSubsets);
+
+        // Backtrack and exclude current number
+        current.remove(current.size() - 1);
+        int idx = index+1;
+        while(idx<nums.length && nums[idx] == nums[idx-1]){
+            idx++;
+        }
+        generateSubsets(idx, nums, current, allSubsets);
+    }
+}
