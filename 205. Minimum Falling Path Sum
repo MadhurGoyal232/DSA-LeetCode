@@ -1,0 +1,100 @@
+// class Solution {
+//     // public int func(int[][] matrix, int row, int col, int[][] dp){
+
+        
+//     //     if(col <0 || col>matrix[0].length-1){
+//     //         return (int)(1e9);
+//     //     }
+//     //     if(row == 0){
+//     //         return matrix[row][col];
+//     //     }
+
+//     //     if(dp[row][col] != -1){
+//     //         return dp[row][col];
+//     //     }
+
+//     //     int up = func(matrix, row-1, col , dp);
+//     //     int left = func(matrix, row-1, col-1 , dp);
+//     //     int right = func(matrix, row-1, col+1, dp);
+
+//     //     int min =  matrix[row][col] + Math.min(up, Math.min(left , right));
+
+//     //     return dp[row][col] = min;
+
+//     // }
+//     public int minFallingPathSum(int[][] matrix) {
+//         int n = matrix.length-1;
+//         int col = matrix[0].length -1;
+
+//         int[][] dp = new int[n+1][col+1];
+
+//         // for(int i =0;i<=n;i++){
+    
+//         //     Arrays.fill(dp[i], -1);
+        
+//         // }
+//          for(int j = 0; j <= n; j++) {
+//             dp[0][j] = matrix[0][j];
+//         }
+
+//         for(int i = 1; i < n; i++) {
+//             for(int j = 0; j < n; j++) {
+                
+//                 // normal down
+//                 int up = dp[i-1][j];
+
+//                 // left diagonal
+//                 int left = (j > 0) ? dp[i-1][j-1] : (int)(1e9);
+
+//                 // right diagonal
+//                 int right = (j < n-1) ? dp[i-1][j+1] : (int)(1e9);
+
+//                 dp[i][j] = matrix[i][j] + Math.min(up, Math.min(left, right));
+//             }
+//         }
+
+
+//         int min = (int)(1e9);
+//         for(int j=0;j<=col;j++){
+//             min = Math.min(min, dp[n][j]);
+//         }
+
+//         return min;
+//     }
+// }
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+        int n = matrix.length;
+        int[][] dp = new int[n][n];
+
+        // Step 1: base case (first row copied)
+        for(int j = 0; j < n; j++) {
+            dp[0][j] = matrix[0][j];
+        }
+
+        // Step 2: fill dp table (row by row)
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                
+                // normal down
+                int up = dp[i-1][j];
+
+                // left diagonal
+                int left = (j > 0) ? dp[i-1][j-1] : (int)(1e9);
+
+                // right diagonal
+                int right = (j < n-1) ? dp[i-1][j+1] : (int)(1e9);
+
+                dp[i][j] = matrix[i][j] + Math.min(up, Math.min(left, right));
+            }
+        }
+
+        // Step 3: minimum in last row
+        int ans = (int)(1e9);
+        for(int j = 0; j < n; j++){
+            ans = Math.min(ans, dp[n-1][j]);
+        }
+
+        return ans;
+    }
+}
