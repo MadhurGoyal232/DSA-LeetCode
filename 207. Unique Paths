@@ -1,0 +1,62 @@
+class Solution {
+
+    public int helper(int[][] nums , int row , int col , int[][] dp){
+
+        if(row == 0 && col == 0){
+            return 1;
+        }
+        if(col < 0 || row < 0){
+            return 0;
+        }
+
+        if(dp[row][col] != -1){
+            return dp[row][col];
+        }
+
+        int up = helper(nums, row - 1, col , dp);
+        int left = helper(nums, row, col-1 ,dp);
+
+        return dp[row][col] = up + left;
+    }
+    // private int count = 0;
+    // private void solve(int[][] arr, int row , int col , boolean[][] isVisited){
+
+    //     if(row == arr.length -1 && col == arr[0].length-1){
+    //         count++;
+    //         return;
+    //     }
+
+    //     if(row>arr.length-1 || row<0){
+    //         return;
+    //     }
+    //     if(col>arr[0].length-1 || col <0){
+    //         return;
+    //     }
+    //     if(isVisited[row][col] == true){
+    //         return;
+    //     }
+
+    //     isVisited[row][col] = true;
+
+    //         solve(arr, row+1 , col , isVisited);
+    //         solve(arr, row, col+1 , isVisited);
+
+    //     isVisited[row][col] = false;
+        
+    // }
+    public int uniquePaths(int m, int n) {
+        // int[][] arr = new int[m][n];
+        // boolean[][] isVisited = new boolean[m][n];
+
+        // solve(arr, 0 , 0 , isVisited);
+        // return count;
+        int arr[][] = new int[m][n];
+        int dp[][] = new int[m][n];
+
+        for(int[] i : dp){
+            Arrays.fill(i , -1);
+        }
+
+        return helper(arr, m-1, n-1 , dp);
+    }
+}
