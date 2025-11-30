@@ -1,0 +1,38 @@
+class Solution {
+    public int helper(int[] nums,int start , int end , int turn ,int[][]dp ){
+
+        if(start > end){
+            return 0;
+        }
+        if(dp[start][end] != -1){
+            return dp[start][end];
+        }
+        if(turn == 0){
+
+            int s1 = nums[start] + helper(nums, start +1 , end , 1 , dp);
+            int s2 = nums[end] + helper(nums, start, end-1, 1 , dp);
+
+            return dp[start][end] = Math.max(s1, s2);
+        }
+        else{
+            int s1 =  helper(nums, start +1 , end , 0 , dp);
+            int s2 =  helper(nums, start, end-1, 0 , dp);
+             return dp[start][end] = Math.min(s1, s2);
+        }
+    }
+        public boolean predictTheWinner(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][n];
+        int score = 0;
+        for(int i[] : dp){
+            Arrays.fill(i , -1);
+        }
+        for(int r : nums){
+            score += r;
+        }
+        int s1  = helper(nums , 0 , n-1 , 0 , dp );
+
+        return s1>= score-s1;
+
+    }
+}
