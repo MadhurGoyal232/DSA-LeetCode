@@ -1,0 +1,39 @@
+class Solution {
+    public void swap(int a , int b, int arr[]){
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+    public int[] prevPermOpt1(int[] arr) {
+        if(arr.length<2){
+            return arr;
+        }
+
+        int point = -1;
+
+        for(int i=arr.length-1;i>0;i--){
+            if(arr[i-1] > arr[i]){
+               point = i-1; 
+               break;
+            }
+        }
+
+        if(point == -1){
+            return arr;
+        }
+
+        int maxP = point+1;
+
+        for(int i=maxP;i<arr.length;i++){
+            if(arr[i] >= arr[point]){
+                break;
+            }
+            if(arr[i] > arr[maxP]){
+                maxP = i;
+            }
+        }
+
+        swap(maxP, point , arr);
+        return arr;
+    }
+}
